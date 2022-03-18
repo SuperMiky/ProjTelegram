@@ -33,6 +33,8 @@ import org.xml.sax.SAXException;
  */
 
 public class Functions {
+    
+    public Functions(){}
     public User getMe()
     {
         User user = new User();
