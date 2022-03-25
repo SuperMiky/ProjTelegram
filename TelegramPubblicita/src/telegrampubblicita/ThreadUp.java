@@ -45,9 +45,9 @@ public class ThreadUp extends Thread {
                 long idUser = Long.parseLong(element.getMessage().getFrom().getId()); //id user
                 long idMess = Long.parseLong(element.getMessage().getMessage_id()); //id messaggio
                 
-                
-                if(map.containsValue(idUser) && idMess > map.get(idUser))
+                if(!map.containsValue(idUser) || (map.containsValue(idUser) && idMess > map.get(idMess))) //se lo user non c'è o c'è e il messaggio è nuovo
                 {
+                    map.put(idUser, idMess);
                     System.out.println(element.ToString());
                     String testo = element.getMessage().getText();
 
@@ -63,7 +63,6 @@ public class ThreadUp extends Thread {
                             String idChat = element.getMessage().getChat().getId();
                             String firstName = element.getMessage().getFrom().getFirst_name();
                             fx.SaveCsv(f, idChat, firstName, lat, lon); //salvo Csv
-                            map.put(idUser, idMess);
                         } catch (UnsupportedEncodingException ex) {
                             Logger.getLogger(ThreadUp.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (IOException ex) {
@@ -82,5 +81,10 @@ public class ThreadUp extends Thread {
                 }
             }   
         }
+    }
+    
+    private void ottieni()
+    {
+        
     }
 }
